@@ -63,6 +63,16 @@
     </div>
 
     <br />
+    <label>Example progress bar</lable>
+    <input 
+      type="range"
+      id="progress-bar"
+      name="progress-bar"
+      min="0"
+      max="100"
+      value="0"
+      />
+    <br/>
 
     <p>
       Easily add alternative audio tracks like languages or commentary by adding
@@ -72,7 +82,16 @@
     <br />
 
     <script>
+      const progressBar = document.getElementById('progress-bar');
       let controller;
+
+      progressBar.addEventListener("change",(e)=>{
+        if(controller){
+          controller = video.groupController;
+        }
+        controller.currentTime = e.target.value;
+      })
+
       document
         .querySelector('#media-group-script')
         .addEventListener('load', () => {
@@ -104,6 +123,10 @@
           controller.addEventListener('waiting', (e) => {
             console.log(e.type);
           });
+
+          controller.addEventListener('timeupdate',(e)=>{
+            progressBar.value = controller.currentTime;
+          })
 
           playbtn.onclick = () => {
             if (controller.playbackState === 'waiting') {
