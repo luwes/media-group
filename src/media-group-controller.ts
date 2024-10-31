@@ -306,7 +306,7 @@ export class MediaGroupController extends EventTarget {
         // https://www.prosoundtraining.com/site/wp-content/uploads/2014/02/Lip-Sync-Errors.pdf
         // Safari is very difficult to get synced so close.
         // Working with playbackRate is impossible on Safari, try with seeking.
-        const target = child.dataset.groupSeekPrecision ?? 0.05;
+        const target = child.dataset.groupSeekPrecision ?? 0.5;
         const offset = 0;
         const targetTime = sourceTime + offset / 1000;
         const currentTime = child.currentTime;
